@@ -13,18 +13,23 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#firstName').type('João')
         cy.get('#lastName').type('Anunciação')
         cy.get('#email').type('joaobot@hotmail.com')
-        cy.get('#open-text-area')
-        .type('Teste')
+        cy.get('#open-text-area').type('Teste')
         cy.get('button[type="submit"]').click()
     })
 
-    it.only('Exibe mensagem de erro ao submeter um email com formatação inválida', function() {
+    // Exercício extra 2
+    it('Exibe mensagem de erro ao submeter um email com formatação inválida', function() {
         cy.get('#firstName').type('João')
         cy.get('#lastName').type('Anunciação')
         cy.get('#email').type('joaobot#hotmail.com')
-        cy.get('#open-text-area')
-        .type('Teste')
+        cy.get('#open-text-area').type('Teste')
         cy.get('button[type="submit"]').click()
         cy.get('.error').should('be.visible')
     })
+
+    // Exercício extra 3
+    it.only('Verificar que campo de telefone aceita somente números', function() {
+        cy.get('#phone').type('Aa').should('not.have.value')  // ou usar .should('have.value', '')
+    })
+
   })
