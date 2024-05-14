@@ -28,8 +28,18 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     // Exercício extra 3
-    it.only('Verificar que campo de telefone aceita somente números', function() {
+    it('Verificar que campo de telefone aceita somente números', function() {
         cy.get('#phone').type('Aa').should('not.have.value')  // ou usar .should('have.value', '')
     })
 
+    // Exercício extra 4
+    it.only('Exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio', function() {
+        cy.get('#firstName').type('João')
+        cy.get('#lastName').type('Anunciação')
+        cy.get('#email').type('joaobot@hotmail.com')
+        cy.get('#open-text-area').type('Teste')
+        cy.get('#phone-checkbox').check()
+        cy.get('button[type="submit"]').click()
+        cy.get('.error').should('be.visible')
+    })
   })
